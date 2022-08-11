@@ -18,6 +18,8 @@ const SPRITE_HEIGHT = 523;
 
 let frameX = 1;
 let frameY = 1;
+let gameFrame = 0;
+let staggerFrame = 5;
 
 /**
  * When the animation function is called
@@ -38,6 +40,13 @@ const animate = () => {
     CANVAS_WIDTH,
     CANVAS_HEIGHT
   );
+
+  if (gameFrame % staggerFrame === 0) {
+    if (frameX < 6) frameX++;
+    else frameX = 0;
+  }
+
+  gameFrame++;
   requestAnimationFrame(animate);
 };
 
