@@ -7,3 +7,16 @@
   width: 600px;
   height: 600px;
 }
+
+#controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+#controls,
+select,
+option {
+  font-size: 1.5rem;
+}
