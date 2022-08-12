@@ -28,35 +28,36 @@ const SPRITE_WIDTH = 575;
 const SPRITE_HEIGHT = 523;
 
 let gameFrame = 0;
-let staggerFrame = 5;
+let staggerFrame = 5; // Set the sprite animation speed
 
 const spriteAnimations: SpriteAnimation[] = [];
 
+// Get frames positions
 animationStates.forEach((state, index) => {
   let frames: Frame = {
-    loc: []
+    location: []
   };
-  for (let j = 0; j < state.frames; j++) {
-    let positionX = j * SPRITE_WIDTH;
+
+  for (let i = 0; i < state.frames; i++) {
+    let positionX = i * SPRITE_WIDTH;
     let positionY = index * SPRITE_HEIGHT;
     let position: Position = { x: positionX, y: positionY };
-    frames.loc.push(position);
+
+    frames.location.push(position);
     spriteAnimations[state.name] = frames;
-    console.log(spriteAnimations);
   }
 });
 
-/**
- * When the animation function is called
- * The canvas is cleared (reset)
- */
-const animate = () => {
+const animateSprite = () => {
+  // The canvas is cleared after each frame
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
   let position =
     Math.floor(gameFrame / staggerFrame) %
-    spriteAnimations[playerState].loc.length;
-  let frameX = spriteAnimations[playerState].loc[position].x;
-  let frameY = spriteAnimations[playerState].loc[position].y;
+    spriteAnimations[playerState].location.length;
+  let frameX = spriteAnimations[playerState].location[position].x;
+  let frameY = spriteAnimations[playerState].location[position].y;
+
   // ctx.drawImage(playerImage, sx, sy, sw, sh, dx, dy, dw, dh);
   ctx.drawImage(
     playerImage,
@@ -70,13 +71,8 @@ const animate = () => {
     CANVAS_HEIGHT
   );
 
-  if (gameFrame % staggerFrame === 0) {
-    if (frameX < 6) frameX++;
-    else frameX = 0;
-  }
-
   gameFrame++;
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animateSprite);
 };
 
-animate();
+animateSprite();
