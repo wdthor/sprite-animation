@@ -1,7 +1,7 @@
 {
-  "name": "vite-1-sprite-animation",
+  "name": "sprite-animation",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
